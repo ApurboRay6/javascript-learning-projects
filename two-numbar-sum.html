@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Numbar Subtrasom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .sum-forme {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 480px;
+            background-color: #D980FA;
+            margin: auto;
+            padding: 25px;
+            border-radius: 16px;
+        }
+
+        .sum-forme h2 {
+            text-align: center;
+        }
+
+        element.style {
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+        .sum-forme input {
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+
+        #btn {
+            padding: 10px 102px;
+            margin: 20px auto;
+            outline: none;
+            border: none;
+            border-radius: 8px 0 8px 0;
+        }
+
+        #btn .fa-bars {
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="sum-forme">
+        <h2>Sum Calculation</h2>
+        <div class="nubarfilt">
+            <input id="sun01" type="number" placeholder="Enter a 1st Numbar">
+            +
+            <input id="sun02" type="number" placeholder="Enter a 2st  Numbar">
+        </div>
+        <button id="btn"> <i class="fa-solid fa-bars"></i></button>
+        <P id="demo">All Sume :</P>
+    </div>
+
+    <script>
+        let btn = document.getElementById("btn");
+        let demo = document.getElementById("demo");
+        let op = document.getElementById("op");
+
+        btn.addEventListener("click", function () {
+            let num01 = document.getElementById("sun01").value;
+            let num02 = document.getElementById("sun02").value;
+            let sum = parseInt(num01) + parseInt(num02);
+
+
+            demo.innerHTML = "Sume = " + sum;
+
+        });
+    </script>
+
+
+</body>
+
+</html>

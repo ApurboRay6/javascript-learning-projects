@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select School</title>
+</head>
+
+<body>
+
+
+    <select name="" id="op">
+        <option value=" Sks School and Colages ">SKS </option>
+        <option value="R.C.I.T School "> RCIT</option>
+        <option value="T.M.S School "> Tms</option>
+    </select>
+
+    <p id="demo"> </p>
+
+    <script>
+        let selectSchool = document.getElementById("op");
+        let demo = document.getElementById("demo");
+
+        selectSchool.addEventListener("change", function () {
+            let op = selectSchool.value;
+            demo.innerText = " Your School Name : " + op;
+        });
+
+    </script>
+
+
+</body>
+
+</html>
