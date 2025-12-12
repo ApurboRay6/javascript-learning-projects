@@ -29,7 +29,7 @@
             align-items: center;
         }
 
-        element.style {
+        select {
             border: none;
             outline: none;
             background: none;
@@ -54,42 +54,61 @@
         #btn .fa-bars {
             font-size: 18px;
         }
+
+        p {
+            font-size: 18px;
+            font-weight: 600;
+        }
     </style>
 
 </head>
 
 <body>
     <div class="sum-forme">
-        <h2>Sum Calculation</h2>
+        <h2>Two Numbers Calculation </h2>
         <div class="nubarfilt">
-            <input id="sun01" type="number" placeholder="Enter a 1st Numbar">
-            <select name="" id="op">
+            <input id="sun01" type="number" placeholder="Enter a 1st Number">
+            <select id="op">
                 <option value="+">+</option>
                 <option value="-">-</option>
-                <option value="-">*</option>
-                <option value="-">%</option>
+                <option value="*">*</option>
+                <option value="%">%</option>
             </select>
-            <input id="sun02" type="number" placeholder="Enter a 2st  Numbar">
+            <input id="sun02" type="number" placeholder="Enter a 2nd Number">
         </div>
-        <button id="btn"> <i class="fa-solid fa-bars"></i></button>
-        <P id="demo">All Sume :</P>
-    </div>
+        <button id="btn"><i class="fa-solid fa-bars"></i></button>
+        <p id="demo">calculation result of two numbers :</p>
 
-    <script>
-        let btn = document.getElementById("btn");
-        let demo = document.getElementById("demo");
-        let op = document.getElementById("op");
+        <script>
+            let btn = document.getElementById("btn");
+            let demo = document.getElementById("demo");
+            let op = document.getElementById("op");
 
-        btn.addEventListener("click", function () {
-            let num01 = document.getElementById("sun01").value;
-            let num02 = document.getElementById("sun02").value;
-            let sum = parseInt(num01) + parseInt(num02);
+            btn.addEventListener("click", function () {
+                let num01 = parseFloat(document.getElementById("sun01").value);
+                let num02 = parseFloat(document.getElementById("sun02").value);
+                let result;
 
+                switch (op.value) {
+                    case "+":
+                        result = num01 + num02;
+                        break;
+                    case "-":
+                        result = num01 - num02;
+                        break;
+                    case "*":
+                        result = num01 * num02;
+                        break;
+                    case "%":
+                        result = num01 % num02;
+                        break;
+                    default:
+                        result = "Invalid Operation";
+                }
 
-            demo.innerHTML = "Sume = " + sum;
-
-        });
-    </script>
+                demo.innerHTML = "Result: " + result;
+            });
+        </script>
 
 
 </body>
