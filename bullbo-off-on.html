@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulbo On Off Projact </title>
+</head>
+
+<body>
+
+    <img id="bulbooff" src="pic_bulboff.gif" alt="off">
+
+    <button id="btn"> btn </button>
+
+    <script>
+        var btn = document.getElementById("btn");
+        var bulbooff = document.getElementById("bulbooff");
+
+        btn.addEventListener("click", function () {
+            if (bulbooff.src.match("pic_bulboff.gif")) {
+                bulbooff.src = "pic_bulbon.gif";
+            } else {
+                bulbooff.src = "pic_bulboff.gif";
+            }
+        });
+
+    </script>
+</body>
+
+</html>
