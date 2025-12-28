@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock 2025</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .body-bg {
+            background-color: #dcdde1;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            margin: 50px;
+            font-size: 55px;
+        }
+
+        .clock-display {
+            display: flex;
+            align-items: center;
+            background-color: black;
+            height: 108px;
+            padding: 20px;
+            border: 2px solid white;
+            border-radius: 16px;
+            gap: 20px;
+        }
+
+        .time {
+            color: red;
+            align-items: center;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 75px;
+        }
+
+        .time-period {
+            color: white;
+            font-size: 25px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-bg">
+        <h2>Desk Digital Clock</h2>
+        <div class="clock-display">
+            <h1 class="time" id="time"> </h1>
+            <small class="time-period" id="timePeriod">PM</small>
+        </div>
+    </div>
+
+
+    <script>
+        function digitelClock() {
+            const date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+            let timeFormat = "AM";
+
+            if (hours === 0) {
+                hours = 12;
+            } else if (hours > 12) {
+                hours = hours - 12;
+                timeFormat = "PM";
+            }
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            const finalTime = `${hours} : ${minutes} : ${seconds}`;
+            document.getElementById("time").innerText = finalTime;
+            document.getElementById("timePeriod").innerText = timeFotimeFormatrmat;
+        }
+
+        // run clock
+        setInterval(digitelClock, 1000);
+        digitelClock();
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> KM to Feet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #575fcf;
+        }
+
+        form {
+            padding: 50px 30px 20px;
+            background-color: #F5F0F0;
+            box-shadow: 1px rgb(red, green, blue);
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <form action="form">
+
+            <input id="input01" type="number">
+            <input id="input02" type="number">
+            <button id="btn" type="submit">Subnit</button>
+        </form>
+
+    </div>
+
+
+
+    <script>
+
+        let input01 = document.querySelector("#input01");
+        let input02 = document.querySelector("#input02");
+        let btn = document.querySelector("#btn");
+
+        btn.addEventListener("click", function () {
+            let km = Number(input01.value);
+            let feet = km * 3280.84;
+            input02.value = feet;
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

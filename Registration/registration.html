@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacascript Form Registration </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-color: #575fcf;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container form {
+            width: 90%;
+            max-width: 500px;
+            padding: 50px 30px 20px;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0 0;
+            position: relative;
+        }
+
+        .input-group label {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0 0 10px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: #a6a8aa;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+
+        .input-group span {
+            position: absolute;
+            top: 39px;
+            right: 10px;
+            color: red;
+
+        }
+
+        .input-group span .fa-circle-check {
+            color: green;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 50px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d2dae2;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="">
+            <h2>Form Registration</h2>
+            <div class="input-group">
+                <label for="name">Name :</label>
+                <input id="contactName" type="text" placeholder="Enter Your Nane">
+                <span id="nameError"></span>
+            </div>
+            <div class="input-group">
+                <label for="phn">Phone No :</label>
+                <input id="contactPhn" type="tel" placeholder="017 xxxx xxxx">
+                <span id="phoneError"></span>
+            </div>
+            <div class="input-group">
+                <label for="email">Email :</label>
+                <input id="contactEmail" type="email" placeholder="Enter Email">
+                <span id="emailError"></span>
+            </div>
+            <button id="submitBtn" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+
+        const nameError = document.querySelector('#nameError');
+        const phoneError = document.querySelector('#phoneError');
+        const emailError = document.querySelector('#emailError');
+        // Dom
+        const contactName = document.querySelector('#contactName')
+        const contactPhn = document.querySelector('#contactPhn')
+        const contactEmail = document.querySelector('#contactEmail')
+        const submitBtn = document.querySelector('#submitBtn')
+
+        contactName.addEventListener('keyup', function () {
+            const contactNameVal = contactName.value.trim();
+
+            if (contactNameVal === '') {
+                nameError.innerHTML = "Name is required";
+                return false;
+            }
+
+            if (!contactNameVal.match(/^[A-Za-z]+\s[A-Za-z]+$/)) {
+                nameError.innerHTML = "Write full name";
+                return false;
+            }
+
+            nameError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            return true;
+        });
+
+        contactPhn.addEventListener('keyup', function () {
+            const contactPhnVal = contactPhn.value.trim();
+
+            if (contactPhnVal === '') {
+                phoneError.innerHTML = "Phone NO is required";
+                return false;
+            }
+
+            if (contactPhnVal.length !== 11) {
+                phoneError.innerHTML = "Phone no should be 11 digits";
+                return false;
+            }
+
+            if (contactPhnVal.match(/^[0-9]{11}&/)) {
+                phoneError.innerHTML = "Only  digits please";
+                return false;
+            }
+
+            phoneError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            return true;
+        });
+
+        contactEmail.addEventListener('keyup', function () {
+            const contactEmailVal = contactEmail.value.trim();
+
+            if (contactEmailVal === '') {
+                emailError.innerHTML = "Email is required";
+                return false;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+            if (!emailPattern.test(contactEmailVal)) {
+                emailError.innerHTML = "Email is invalid";
+                return false;
+            }
+
+            emailError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            return true;
+        });
+
+
+        submitBtn.addEventListener("click", function () {
+            if (!contactNameVal() || !contactPhnVal() || !contactEmailVal()) {
+                alert("hgfshgfj");
+                return false;
+            }
+            return true;
+        });
+
+
+
+
+
+
+        // -------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
