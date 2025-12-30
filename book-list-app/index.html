@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css" />
+    <title>My BookList App</title>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="display-4 text-center"><i class="fas fa-book-open text-warning"></i>JavaScript Book
+            <span class="text-warning"> List</span> App
+        </h1>
+        <form id="bookForm">
+            <div class="form-group">
+                <label for="title">Title :</label>
+                <input type="text" id="title" class="form-control" />
+                <span class="text-danger" id="errorTitle"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="author">Author :</label>
+                <input type="text" id="author" class="form-control" />
+                <span class="text-danger" id="errorAuthor"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" id="year" class="form-control" />
+                <span class="text-danger" id="errorYear"></span>
+            </div>
+            <input type="submit" value="Add Book" class="btn btn-warning btn-block" id="btn" />
+        </form>
+        <table class="table table-striped mt-5 text-center">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="bookList">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- <script>
+        // DOM Selection
+
+        let bookForm = document.getElementById("bookForm");
+        let title = document.getElementById("title");
+        let author = document.getElementById("author");
+        let year = document.getElementById("year");
+        let btn = document.getElementById("btn");
+        let booklist = document.getElementById("bookList");
+
+        let errorTitle = document.getElementById("errorTitle");
+        let errorAuthor = document.getElementById("errorAuthor");
+        let errorYear = document.getElementById("errorYear");
+
+        let deleteBtn01 = document.querySelector(".deleteBtn");
+
+
+        // Event Listener
+
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            //    get value  
+
+            let titleVal = title.value;
+            let authorVal = author.value;
+            let yearVal = year.value;
+
+            // validation check 
+
+            if (titleVal === '' || title.length < 0) {
+                errorTitle.innerText = "Enter Your title";
+                return false;
+            } else if (authorVal === '') {
+                errorAuthor.innerText = "Enter Your author";
+                return false;
+            } else if (yearVal === '') {
+                errorYear.innerText = "Enter Your year";
+                return false;
+            } else {
+                // Create Tabilel Row 
+                const newRow = document.createElement("tr");
+
+                // create Tabile Data 
+                let newTitle = document.createElement("td");
+                newTitle.innerText = titleVal;
+                newRow.appendChild(newTitle);
+
+                // create Tabile Data 
+                let newAuthor = document.createElement("td");
+                newAuthor.innerText = authorVal;
+                newRow.appendChild(newAuthor);
+
+                // create Tabile Data 
+                let newYear = document.createElement("td");
+                newYear.innerText = yearVal;
+                newRow.appendChild(newYear);
+
+                let edDlBtn = document.createElement("td");
+
+                // create  Edit Button
+                let createEditBtn = document.createElement("button");
+                createEditBtn.setAttribute('class', 'btn btn-warning my-1 ');
+                createEditBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
+                edDlBtn.appendChild(createEditBtn);
+                newRow.appendChild(edDlBtn);
+
+                // create  Delete Button
+                let createDeleteBtn = document.createElement('button');
+                createDeleteBtn.setAttribute('class', 'btn btn-danger mx-2 deleteBtn');
+                createDeleteBtn.innerHTML = `<i class="fa-solid fa-delete-left "></i>`;
+                edDlBtn.appendChild(createDeleteBtn);
+                newRow.appendChild(edDlBtn);
+
+                booklist.appendChild(newRow);
+
+                bookForm.reset()
+            }
+
+        });
+
+        // Detete Element 
+
+        deleteBtn01.addEventListener("click", function () {
+            const confirmed = confirm("Are you sure you want to delete?");
+            if (confirmed) {
+                console.log("Deleted");
+            }
+        });
+
+    </script> -->
+
+
+    <script>
+        // DOM Selection
+        const bookForm = document.getElementById("bookForm");
+        const title = document.getElementById("title");
+        const author = document.getElementById("author");
+        const year = document.getElementById("year");
+        const btn = document.getElementById("btn");
+        const booklist = document.getElementById("bookList");
+
+        const errorTitle = document.getElementById("errorTitle");
+        const errorAuthor = document.getElementById("errorAuthor");
+        const errorYear = document.getElementById("errorYear");
+
+        // Event Listener for Adding Books
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Reset error messages
+            errorTitle.innerText = "";
+            errorAuthor.innerText = "";
+            errorYear.innerText = "";
+
+            // get value  
+            let titleVal = title.value.trim();
+            let authorVal = author.value.trim();
+            let yearVal = year.value.trim();
+
+            // validation check 
+            if (titleVal === '') {
+                errorTitle.innerText = "Enter Your title";
+            } else if (authorVal === '') {
+                errorAuthor.innerText = "Enter Your author";
+            } else if (yearVal === '') {
+                errorYear.innerText = "Enter Your year";
+            } else {
+                // Create Table Row 
+                const newRow = document.createElement("tr");
+
+
+                newRow.innerHTML = `
+                <td>${titleVal}</td>
+                <td>${authorVal}</td>
+                <td>${yearVal}</td>
+                <td>
+                    <button class="btn btn-warning my-1 editBtn">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button class="btn btn-danger mx-2 deleteBtn">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </button>
+                </td>
+            `; ~
+
+                    booklist.appendChild(newRow);
+                bookForm.reset();
+            }
+        });
+
+
+        booklist.addEventListener("click", function (e) {
+
+            const target = e.target;
+
+            // DELETE FUNCTIONALITY
+            if (target.closest(".deleteBtn")) {
+                if (confirm("Are you sure you want to delete?")) {
+                    const row = target.closest("tr");
+                    row.remove();
+                }
+            }
+
+            // EDIT FUNCTIONALITY (Optional Bonus)
+            if (target.closest(".editBtn")) {
+                const row = target.closest("tr");
+                const cells = row.querySelectorAll("td");
+
+                title.value = cells[0].innerText;
+                author.value = cells[1].innerText;
+                year.value = cells[2].innerText;
+
+
+                row.remove();
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
