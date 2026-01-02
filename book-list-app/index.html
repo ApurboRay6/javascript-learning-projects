@@ -47,11 +47,12 @@
                 </tr>
             </thead>
             <tbody id="bookList">
+
             </tbody>
         </table>
     </div>
 
-    <!-- <script>
+    <script>
         // DOM Selection
 
         let bookForm = document.getElementById("bookForm");
@@ -65,14 +66,10 @@
         let errorAuthor = document.getElementById("errorAuthor");
         let errorYear = document.getElementById("errorYear");
 
-        let deleteBtn01 = document.querySelector(".deleteBtn");
-
 
         // Event Listener
-
         btn.addEventListener("click", function (e) {
             e.preventDefault();
-
             //    get value  
 
             let titleVal = title.value;
@@ -83,152 +80,102 @@
 
             if (titleVal === '' || title.length < 0) {
                 errorTitle.innerText = "Enter Your title";
-                return false;
             } else if (authorVal === '') {
                 errorAuthor.innerText = "Enter Your author";
-                return false;
             } else if (yearVal === '') {
                 errorYear.innerText = "Enter Your year";
-                return false;
             } else {
-                // Create Tabilel Row 
+                // Rest The Form
+                bookForm.reset();
+
+                // Button Action
+                btnTextInChate();
+
+                // LocalStorage Data Send 
+                addNewItem({
+                    title: titleVal,
+                    author: authorVal,
+                    year: yearVal
+                });
+
+                // Reload the table form
+                window.location.reload();
+
+            }
+        });
+
+        // Action button text changes
+        function btnTextUpDate() {
+            btn.value = "Up Date ";
+        }
+
+        function btnTextInChate() {
+            btn.value = "Add Book";
+        }
+
+        // Store local store with json data
+        function addNewItem(item) {
+            var myList = JSON.parse(localStorage.getItem("myList")) || [];
+            myList.push(item);
+            localStorage.setItem("myList", JSON.stringify(myList));
+        }
+
+        // Get json ata form localstore
+        function getAllItems() {
+            return JSON.parse(localStorage.getItem("myList")) || [];
+        }
+
+        // Show the all data form localstore
+        function displayItems() {
+            var items = getAllItems();
+            booklist.innerHTML = "";
+
+            items.forEach(function (item, index) {
                 const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${item.title}</td>
+                    <td>${item.author}</td>
+                    <td>${item.year}</td>
+                    <td>
+                       <button class="btn btn-warning my-1 editeBtn" onclick="editItem(${index})" >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
 
-                // create Tabile Data 
-                let newTitle = document.createElement("td");
-                newTitle.innerText = titleVal;
-                newRow.appendChild(newTitle);
-
-                // create Tabile Data 
-                let newAuthor = document.createElement("td");
-                newAuthor.innerText = authorVal;
-                newRow.appendChild(newAuthor);
-
-                // create Tabile Data 
-                let newYear = document.createElement("td");
-                newYear.innerText = yearVal;
-                newRow.appendChild(newYear);
-
-                let edDlBtn = document.createElement("td");
-
-                // create  Edit Button
-                let createEditBtn = document.createElement("button");
-                createEditBtn.setAttribute('class', 'btn btn-warning my-1 ');
-                createEditBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
-                edDlBtn.appendChild(createEditBtn);
-                newRow.appendChild(edDlBtn);
-
-                // create  Delete Button
-                let createDeleteBtn = document.createElement('button');
-                createDeleteBtn.setAttribute('class', 'btn btn-danger mx-2 deleteBtn');
-                createDeleteBtn.innerHTML = `<i class="fa-solid fa-delete-left "></i>`;
-                edDlBtn.appendChild(createDeleteBtn);
-                newRow.appendChild(edDlBtn);
+                        <button class="btn btn-danger mx-2" onclick="deleteItem(${index})">
+                            <i class="fa-solid fa-delete-left"></i>
+                        </button>
+                    </td> 
+                `;
 
                 booklist.appendChild(newRow);
+            });
+        }
 
-                bookForm.reset()
+        displayItems();
+
+        // Here is Delete item
+        function deleteItem(index) {
+            let isTrue = confirm("Are you want sure ?");
+            if (isTrue == true) {
+                var items = getAllItems();
+                items.splice(index, 1);
+                localStorage.setItem("myList", JSON.stringify(items));
+                displayItems();
             }
 
-        });
+        }
 
-        // Detete Element 
-
-        deleteBtn01.addEventListener("click", function () {
-            const confirmed = confirm("Are you sure you want to delete?");
-            if (confirmed) {
-                console.log("Deleted");
-            }
-        });
-
-    </script> -->
+        function deleteItemByTitle(title) {
+            var items = getAllItems();
+            items = items.filter(item => item.title !== title);
+            localStorage.setItem("myList", JSON.stringify(items));
+            displayItems();
+        }
 
 
-    <script>
-        // DOM Selection
-        const bookForm = document.getElementById("bookForm");
-        const title = document.getElementById("title");
-        const author = document.getElementById("author");
-        const year = document.getElementById("year");
-        const btn = document.getElementById("btn");
-        const booklist = document.getElementById("bookList");
 
-        const errorTitle = document.getElementById("errorTitle");
-        const errorAuthor = document.getElementById("errorAuthor");
-        const errorYear = document.getElementById("errorYear");
-
-        // Event Listener for Adding Books
-        btn.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            // Reset error messages
-            errorTitle.innerText = "";
-            errorAuthor.innerText = "";
-            errorYear.innerText = "";
-
-            // get value  
-            let titleVal = title.value.trim();
-            let authorVal = author.value.trim();
-            let yearVal = year.value.trim();
-
-            // validation check 
-            if (titleVal === '') {
-                errorTitle.innerText = "Enter Your title";
-            } else if (authorVal === '') {
-                errorAuthor.innerText = "Enter Your author";
-            } else if (yearVal === '') {
-                errorYear.innerText = "Enter Your year";
-            } else {
-                // Create Table Row 
-                const newRow = document.createElement("tr");
-
-
-                newRow.innerHTML = `
-                <td>${titleVal}</td>
-                <td>${authorVal}</td>
-                <td>${yearVal}</td>
-                <td>
-                    <button class="btn btn-warning my-1 editBtn">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </button>
-                    <button class="btn btn-danger mx-2 deleteBtn">
-                        <i class="fa-solid fa-delete-left"></i>
-                    </button>
-                </td>
-            `; ~
-
-                    booklist.appendChild(newRow);
-                bookForm.reset();
-            }
-        });
-
-
-        booklist.addEventListener("click", function (e) {
-
-            const target = e.target;
-
-            // DELETE FUNCTIONALITY
-            if (target.closest(".deleteBtn")) {
-                if (confirm("Are you sure you want to delete?")) {
-                    const row = target.closest("tr");
-                    row.remove();
-                }
-            }
-
-            // EDIT FUNCTIONALITY (Optional Bonus)
-            if (target.closest(".editBtn")) {
-                const row = target.closest("tr");
-                const cells = row.querySelectorAll("td");
-
-                title.value = cells[0].innerText;
-                author.value = cells[1].innerText;
-                year.value = cells[2].innerText;
-
-
-                row.remove();
-            }
-        });
     </script>
+
 
 
 </body>
